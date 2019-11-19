@@ -5,14 +5,12 @@ function FlashMessage(props) {
 	// type: danger, success, info, warning
 	let { id, type, msg } = props.message;
 	let body = null;
-	console.log('FlashMessage', props);
 
 	const flashID = setTimeout(() => {
 		props.deleteMessage(id);
 	}, 5000);
 
 	const handleClick = () => {
-		console.log('flashID', flashID);
 		props.deleteMessage(id);
 		clearTimeout(flashID);
 	};
@@ -30,15 +28,18 @@ function FlashMessage(props) {
 	}
 
 	return (
-		<div className={s[type]}>
-			<span className={s.closebtn} onClick={handleClick}>
-				&times;
-			</span>
-			<p>
-				<strong>{type}!</strong>
-			</p>
-			{body}
-		</div>
+		<section className={s.message}>
+			<div className={s[type]} >
+				<span className={s.closebtn} onClick={handleClick}>
+					&times;
+				</span>
+				<p>
+					<strong>{type}!</strong>
+				</p>
+				{body}
+			</div>
+		</section>
+		
 	);
 }
 

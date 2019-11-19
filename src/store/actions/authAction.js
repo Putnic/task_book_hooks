@@ -4,7 +4,7 @@ import { CLEAR_MESSAGES } from './types';
 import { addMessage } from './flashActions';
 
 export const logIn = credential => dispatch => {
-	dispatch({ type: CLEAR_MESSAGES });
+	// dispatch({ type: CLEAR_MESSAGES });
 
 	tasksAPI
 		.login(credential)
@@ -16,21 +16,19 @@ export const logIn = credential => dispatch => {
 
 				dispatch({
 					type: LOGIN_SUCCESS,
-					data: {
-						token: data.message.token,
-						timeExpire: timeExpire.getTime()
-					}
+					token: data.message.token,
+					tokenExpire: timeExpire.getTime()
 				});
 				dispatch(addMessage({ type: 'success', msg: 'Login success!' }));
 			} else {
 				console.warn(data.message);
 				dispatch({ type: LOGIN_FAIL });
-				dispatch(addMessage({ type: 'danger', msg: data.message }));
+				dispatch(
+					addMessage({ type: 'danger', msg: data.message })
+				);
 			}
 		})
 		.catch(error => console.warn(error, error.response));
 };
 
-export const logOut = () => ({
-	type: LOGOUT_SUCCESS
-});
+export const logOut = () => ({ type: LOGOUT_SUCCESS });

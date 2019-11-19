@@ -6,6 +6,8 @@ export const CREATE_TASK = 'CREATE_TASK';
 export const TASK_CREATING = 'TASK_CREATING';
 
 export const EDIT_TASK = 'EDIT_TASK';
+export const TASK_EDITING = 'TASK_EDITING';
+
 export const SET_SORTING = 'SET_SORTING';
 
 // MESSAGE
@@ -17,8 +19,6 @@ export const CLEAR_MESSAGES = 'CLEAR_MESSAGES';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-export const USER_LOADING = 'USER_LOADING';
-export const USER_LOADED = 'USER_LOADED';
 
 // Sort username email status, asc desc
 export const SORT_FIELDS = {

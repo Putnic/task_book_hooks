@@ -3,7 +3,8 @@ import {
 	TASKS_LOADING,
 	CREATE_TASK,
 	TASK_CREATING,
-	// EDIT_TASK,
+	EDIT_TASK,
+	TASK_EDITING,
 	SET_SORTING,
 	CLEAR_MESSAGES
 } from './types';
@@ -17,7 +18,7 @@ export const getTasks = (
 	sortField = '',
 	sortDirection = ''
 ) => (dispatch, getState) => {
-	dispatch({type: CLEAR_MESSAGES});
+	// dispatch({ type: CLEAR_MESSAGES });
 	dispatch({ type: TASKS_LOADING });
 
 	tasksAPI
@@ -31,7 +32,7 @@ export const getTasks = (
 				});
 			} else {
 				console.warn(data.message);
-				dispatch(addMessage({type: 'danger', msg: data.message}));
+				dispatch(addMessage({ type: 'danger', msg: data.message }));
 			}
 		})
 		.catch(error => console.warn(error, error.response));
@@ -46,7 +47,7 @@ export const setTasksLoading = () => {
 
 // Create Task
 export const createTask = task => (dispatch, getState) => {
-	dispatch({type: CLEAR_MESSAGES});
+	// dispatch({ type: CLEAR_MESSAGES });
 	dispatch({ type: TASK_CREATING });
 
 	tasksAPI
@@ -57,31 +58,43 @@ export const createTask = task => (dispatch, getState) => {
 					type: CREATE_TASK,
 					task: data.message
 				});
-				dispatch(addMessage({ type: 'success', msg: 'Task was created successfully' }));
+				dispatch(
+					addMessage({ type: 'success', msg: 'Task was created successfully' })
+				);
 				dispatch({ type: TASK_CREATING });
 			} else {
 				console.warn(data.message);
-				dispatch(addMessage({type: 'danger', msg: data.message}));
+				dispatch(addMessage({ type: 'danger', msg: data.message }));
 			}
 		})
 		.catch(error => console.warn(error, error.response));
 };
 
-// export const editTask = (id, task) => (dispatch, getState) => {
-// 	axios
-// 		.put(`/api/tasks/${id}`, task, tokenConfig(getState))
-// 		.then(res => {
-// 			dispatch({
-// 				type: EDIT_TASK,
-// 				payload: res.data.task
-// 			});
-// 		})
-// 		.catch(err =>
-// 			dispatch(
-// 				setErrors(err.response.data, err.response.status, 'EDIT_TASK_FAIL')
-// 			)
-// 		);
-// };
+// Edit Task
+export const editTask = (token, task) => (dispatch, getState) => {
+	// dispatch({ type: CLEAR_MESSAGES });
+	dispatch({ type: TASK_EDITING });
+
+	tasksAPI
+		.editTask(task.id, {...task, token})
+		.then(data => {
+			if (data.status === 'ok') {
+				dispatch({
+					type: EDIT_TASK,
+					task,
+					id: task.id
+				});
+				dispatch(
+					addMessage({ type: 'success', msg: 'Task was updated successfully' })
+				);
+				dispatch({ type: TASK_EDITING });
+			} else {
+				console.warn(data.message);
+				dispatch(addMessage({ type: 'danger', msg: data.message }));
+			}
+		})
+		.catch(error => console.warn(error, error.response));
+};
 
 // Sorting Task
 export const setSort = (sort_field, sort_direction) => ({

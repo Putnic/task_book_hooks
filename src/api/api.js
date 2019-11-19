@@ -4,8 +4,7 @@ import axios from "axios";
 // https://uxcandy.com/~shapoval/test-task-backend/v2/create?developer=Example
 
 const instance = axios.create({
-  baseURL: "https://uxcandy.com/~shapoval/test-task-backend/v2/",
-  headers: { "Content-type": "multipart/form-data" }
+  baseURL: "https://uxcandy.com/~shapoval/test-task-backend/v2/"
 });
 
 export const tasksAPI = {
@@ -22,10 +21,23 @@ export const tasksAPI = {
       .then(response => response.data);
   },
   addTask(task) {
+    let data = getFormData(task);
+
     return instance
-      .post("/create", task, {
+      .post("/create", data, {
         params: {
           developer: "Dmitry"
+        }
+      })
+      .then(response => response.data);
+  },
+  editTask(id, task) {
+    let data = getFormData(task);
+    console.log('editTask', task);
+    return instance
+      .post(`/edit/${id}`, data, {
+        params: {
+          developer: "Dmitry",
         }
       })
       .then(response => response.data);
@@ -40,3 +52,10 @@ export const tasksAPI = {
       .then(response => response.data);
   }
 };
+
+// Convert JS Object to form data
+function getFormData(object) {
+  const formData = new FormData();
+  Object.keys(object).forEach(key => formData.append(key, object[key]));
+  return formData;
+}

@@ -5,7 +5,6 @@ import s from './Header.module.css';
 import LoginModal from '../LoginModal/LoginModal';
 
 function Header() {
-  
   return (
     <header className="shadow">
       <div className={`container ${s.header}`}>
@@ -13,7 +12,6 @@ function Header() {
         <nav>
           <NavLink activeClassName={s.active} exact to="/">Home</NavLink>
           <NavLink activeClassName={s.active} to="/create">AddTask</NavLink>
-          {/* <NavLink activeClassName={s.active} to="/login">LogIn</NavLink> */}
           <LoginModal />
         </nav>
       </div>

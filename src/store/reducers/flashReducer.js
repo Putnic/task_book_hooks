@@ -5,7 +5,6 @@ let _id = 1;
 export default function(state = initialState, action = {}) {
 	switch (action.type) {
 		case ADD_MESSAGE:
-			console.log('_id = ', _id);
 			return [
 				...state,
 				{

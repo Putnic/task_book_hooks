@@ -4,14 +4,16 @@ import {
 	CREATE_TASK,
 	TASK_CREATING,
 	EDIT_TASK,
-	SET_SORTING,
+	TASK_EDITING,
+	SET_SORTING
 } from '../actions/types';
 
 const initialState = {
 	tasks: [],
 	total_task_count: 0,
-  loadedTasks: false,
+	loadedTasks: false,
 	createdTask: false,
+	editedTask: false,
 	sorting: {
 		sort_field: null,
 		sort_direction: null
@@ -47,8 +49,14 @@ export default function(state = initialState, action = {}) {
 			return {
 				...state,
 				tasks: [...state.tasks].map(task =>
-					task._id === action.payload._id ? action.payload : task
-				)
+					task.id === action.id ? action.task : task
+				),
+				editedTask: true
+			};
+		case TASK_EDITING:
+			return {
+				...state,
+				editedTask: false
 			};
 		case SET_SORTING:
 			return {
@@ -57,7 +65,7 @@ export default function(state = initialState, action = {}) {
 					sort_field: action.sort_field,
 					sort_direction: action.sort_direction
 				}
-      };
+			};
 		default:
 			return state;
 	}

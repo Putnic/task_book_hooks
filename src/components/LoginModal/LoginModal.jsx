@@ -2,11 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import s from './LoginModal.module.css';
 
-import { logIn } from '../../store/actions/authAction';
+import { logIn, logOut } from '../../store/actions/authAction';
 
 function LoginModal(props) {
-	console.log('LoginModalContainer: ', props);
-	const { logIn, isAuthenticated } = props;
+	const { logIn, logOut, isAuthenticated } = props;
 
 	let [data, setData] = useState({
 		username: '',
@@ -18,11 +17,11 @@ function LoginModal(props) {
 	const modal = useRef(null);
 		
 		useEffect(() => {
-		console.log('LoginModalContainer useEffect: ', isAuthenticated);
 		if (isAuthenticated) {
 			setData({ username: '', password: '' });
 			handleClose();
 		}
+		// eslint-disable-next-line	
 	}, [isAuthenticated]);
 
 	// Handle the key press event on 'esc'.
@@ -64,8 +63,6 @@ function LoginModal(props) {
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		console.log('SUBMIT');
-		// console.dir(e.target);
 		let dataForm = new FormData(e.target);
 		logIn(dataForm);
 	};
@@ -73,8 +70,9 @@ function LoginModal(props) {
 	return (
 		<React.Fragment>
 			{/* Button to open the modal login form */}
-			<button className={s.login} onClick={handleOpen}>
-				Login
+			<button className={s.login}
+				onClick={isAuthenticated ? logOut : handleOpen}>
+				{isAuthenticated ? 'Logout' : 'Login'}
 			</button>
 
 			{/* The Modal */}
@@ -83,16 +81,15 @@ function LoginModal(props) {
 					ref={modal}
 					onClick={handleOutsideClick}
 				>
-					<form id='login'
+					<form id='login' noValidate
 						className={`${s.modal_content} ${s.animate}`}
 						onSubmit={handleSubmit}
 					>
 						<h2>Login</h2>
-
-						{/* <FlashMessages /> */}
 						<span	className={s.close}	title='Close Modal'	onClick={handleClose} >
 							&times;
 						</span>
+						
 						<div className='s.container'>
 							<label htmlFor='username'>
 								<b>Username</b>
@@ -125,8 +122,8 @@ function LoginModal(props) {
 
 const mapStateToProps = state => {
 	return {
-		isAuthenticated: state.auth.isAuthenticated
+		isAuthenticated: state.auth.isAuthenticated,
 	};
 };
 
-export default connect(mapStateToProps, { logIn })(LoginModal);
+export default connect(mapStateToProps, { logIn, logOut })(LoginModal);
