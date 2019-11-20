@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/task_book_hooks/static/css/main.6b2006c7.chunk.css",
-    "main.js": "/task_book_hooks/static/js/main.b989248f.chunk.js",
-    "main.js.map": "/task_book_hooks/static/js/main.b989248f.chunk.js.map",
+    "main.js": "/task_book_hooks/static/js/main.68dd9120.chunk.js",
+    "main.js.map": "/task_book_hooks/static/js/main.68dd9120.chunk.js.map",
     "runtime-main.js": "/task_book_hooks/static/js/runtime-main.08c0fd14.js",
     "runtime-main.js.map": "/task_book_hooks/static/js/runtime-main.08c0fd14.js.map",
     "static/js/2.b8a6bb3b.chunk.js": "/task_book_hooks/static/js/2.b8a6bb3b.chunk.js",
     "static/js/2.b8a6bb3b.chunk.js.map": "/task_book_hooks/static/js/2.b8a6bb3b.chunk.js.map",
     "index.html": "/task_book_hooks/index.html",
-    "precache-manifest.dd8c90b54718684cea9640cdd77c0862.js": "/task_book_hooks/precache-manifest.dd8c90b54718684cea9640cdd77c0862.js",
+    "precache-manifest.f5266df920e11993157600230a7d8f3a.js": "/task_book_hooks/precache-manifest.f5266df920e11993157600230a7d8f3a.js",
     "service-worker.js": "/task_book_hooks/service-worker.js",
     "static/css/main.6b2006c7.chunk.css.map": "/task_book_hooks/static/css/main.6b2006c7.chunk.css.map"
   },
@@ -16,6 +16,6 @@
     "static/js/runtime-main.08c0fd14.js",
     "static/js/2.b8a6bb3b.chunk.js",
     "static/css/main.6b2006c7.chunk.css",
-    "static/js/main.b989248f.chunk.js"
+    "static/js/main.68dd9120.chunk.js"
   ]
 }
